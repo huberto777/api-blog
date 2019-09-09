@@ -21,5 +21,8 @@ Route::group(['middleware' => 'auth.api',], function () {
 });
 Route::post('login', 'AuthController@login');
 Route::resources([
-    'articles' => 'ArticlesController'
+    'articles' => 'ArticlesController',
+    'articles.comments' => 'CommentsController'
 ]);
+Route::post('/articles/{article}/likes', 'LikesController@like');
+Route::post('/articles/{article}/unlikes', 'LikesController@unlike');

@@ -16,11 +16,10 @@ class ArticlesTableSeeder extends Seeder
         for ($i = 1; $i <= 30; $i++) {
             $title = $faker->text(20);
             DB::table('articles')->insert([
-                'author' => $faker->name,
                 'title' => $title,
-                // 'slug' => str_slug($title),
+                'slug' => str_slug($title),
                 'content' => $faker->text(500),
-                // 'user_id' => 1,
+                'user_id' => 1,
                 // 'path' => null,//$faker->imageUrl(275,150),
                 // 'category_id' => $faker->numberBetween(1,5),
                 'created_at' => $faker->dateTime

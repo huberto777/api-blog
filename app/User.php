@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     use Notifiable;
-
+    use Traits\LikeTrait;
     /**
      * The attributes that are mass assignable.
      *
@@ -19,6 +19,7 @@ class User extends Authenticatable implements JWTSubject
     protected $fillable = [
         'name', 'email', 'password',
     ];
+    // protected $appends = ['isLiked'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -51,5 +52,20 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function articles()
+    {
+        return $this->hasMany('App\Article', 'user_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Comment', 'user_id');
+    }
+
+    public function likes()
+    {
+        return $this->belongsToMany('App\Article', 'likes');
     }
 }
